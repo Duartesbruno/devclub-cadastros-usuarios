@@ -1,0 +1,33 @@
+.card {
+    max-width: 400px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background-color: #2E2D4E;
+    padding: 10px;
+    border-radius: 10px;
+
+    & p {
+        color: #fff;
+        font-weight: bold;
+    }
+
+    & span {
+        font-weight: normal;
+    }
+
+    & button {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+    }
+
+    & button:hover {
+        opacity: 0.5;
+    }
+
+    & button img {
+        width: 24px;
+        height: 24px;
+    }
+}
