@@ -69,8 +69,6 @@ useEffect(() => {
   }
 }, [isEditModalOpen, isDeleteConfirmOpen]);
 
-  console.log(users.map(u => u.id));
-
   return (
     <div className="container">
       <Form
