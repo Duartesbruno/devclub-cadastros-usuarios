@@ -1,18 +1,24 @@
 import axios from 'axios';
 
 const getBaseURL = () => {
-   // Vercel environment
-  const { VERCEL_ENV, VERCEL_URL, VERCEL_BRANCH_URL, VITE_PRODUCTION_API_URL, VITE_LOCAL_API_URL } = import.meta.env;
+  const VITE_LOCAL_API_URL = import.meta.env.VITE_LOCAL_API_URL;
+  const VITE_PRODUCTION_API_URL = import.meta.env.VITE_PRODUCTION_API_URL;
+  const VITE_VERCEL_URL = import.meta.env.VITE_VERCEL_URL;
+  const VITE_VERCEL_BRANCH_URL = import.meta.env.VITE_VERCEL_BRANCH_URL;
 
-  if (VERCEL_ENV) {
-    if (VERCEL_ENV === 'production') {
-      return VITE_PRODUCTION_API_URL || (VERCEL_URL ? `https://${VERCEL_URL}` : '');
-    }
-    if (VERCEL_ENV === 'preview') {
-      return VERCEL_BRANCH_URL ? `https://${VERCEL_BRANCH_URL}` : (VERCEL_URL ? `https://${VERCEL_URL}` : '');
-    }
-  }
-  // Local environment (development)
+  console.log('VITE_LOCAL_API_URL:', VITE_LOCAL_API_URL);
+  console.log('VITE_PRODUCTION_API_URL:', VITE_PRODUCTION_API_URL);
+  console.log('VITE_VERCEL_URL:', VITE_VERCEL_URL);
+  console.log('VITE_VERCEL_BRANCH_URL:', VITE_VERCEL_BRANCH_URL);
+
+  // Produção Vercel
+  if (VITE_PRODUCTION_API_URL) return VITE_PRODUCTION_API_URL;
+
+  // Preview / Workspace Vercel
+  if (VITE_VERCEL_BRANCH_URL) return `https://${VITE_VERCEL_BRANCH_URL}`;
+  if (VITE_VERCEL_URL) return `https://${VITE_VERCEL_URL}`;
+
+  // Local / fallback
   return VITE_LOCAL_API_URL || 'http://localhost:3000';
 };
 
