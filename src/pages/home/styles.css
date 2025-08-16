@@ -88,3 +88,14 @@ custom modal
         background-color: #d32f2f;
     }
 }
+
+/* Skeleton */
+.skeleton-cards {
+    max-width: 400px;
+    width: 100%;
+
+    & .react-loading-skeleton {
+        border-radius: 10px;
+        margin: 10px 0;
+    }
+}

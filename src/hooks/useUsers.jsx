@@ -3,12 +3,20 @@ import { getUsers, createUser, deleteUser, editUser } from "../services/userServ
 
 export function useUsers() {
   const [users, setUsers] = useState([])
+  const [loading, setLoading] = useState(false)
 
   // load users
   useEffect(() => {
     (async () => {
-      const data = await getUsers();
-      setUsers(data);
+      setLoading(true)
+      try {
+        const data = await getUsers();
+        setUsers(data);
+      } catch (error) {
+         console.error("Erro ao carregar usuários:", error);
+      } finally {
+        setLoading(false);
+      }
     })();
   }, []);
 
@@ -33,6 +41,7 @@ export function useUsers() {
     users,
     handleCreateUser,
     handleDeleteUser,
-    handleEditUser
+    handleEditUser,
+    loading
   }
 }

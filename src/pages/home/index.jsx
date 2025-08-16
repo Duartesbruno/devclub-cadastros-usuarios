@@ -3,11 +3,12 @@ import { useUsers } from "../../hooks/useUsers"
 import Form from "./components/Form"
 import Card from "./components/Card"
 import EditModal from "./components/EditModal"
-import DeleteModal from "./components/DeleteModal" 
+import DeleteModal from "./components/DeleteModal"
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton' 
 import "./styles.css"
 
 function Home() {
-  const { users, handleCreateUser, handleDeleteUser, handleEditUser } = useUsers()
+  const { users, handleCreateUser, handleDeleteUser, handleEditUser, loading } = useUsers()
 
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
   const [selectedUser, setSelectedUser] = useState(null)
@@ -77,7 +78,16 @@ useEffect(() => {
         inputEmail={inputEmail}
         onCreate={onCreate}
       />
-      {users.map((user, idx) => (
+      {loading ? (
+        <div className="skeleton-cards">
+          <SkeletonTheme  height="80px" baseColor="#2E2D4E" highlightColor="#8B8AE1">
+            <div>
+                <Skeleton count={3} />
+            </div>
+          </SkeletonTheme>
+        </div>
+      ) : (
+      users.map((user, idx) => (
         <div className="container-card" key={`${idx}-${user.id}`}>
           <Card
             user={user}
@@ -85,7 +95,8 @@ useEffect(() => {
             openDeleteModal={openDeleteModal}
           />
         </div>
-      ))}
+        ))
+      )}
       {isEditModalOpen && (
         <EditModal
           user={selectedUser}
