@@ -39,7 +39,7 @@ Foco em boas práticas, organização de código e uso de variáveis de ambiente
 
 ## Deploy no Vercel
 1. Crie um novo projeto (Add new -> Project);
-2. Configure a variável de ambiente no painel do Vercel( em **Settings** -> **Environment Variables**): `VITE_LOCAL_API_URL`;
+2. Configure a variável de ambiente no painel do Vercel ( em **Settings** -> **Environment Variables**): `VITE_LOCAL_API_URL`;
 3. Faça o Deploy o projeto.
 
 ## Estrutura do Projeto
